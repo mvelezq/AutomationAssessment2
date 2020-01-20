@@ -51,7 +51,6 @@ namespace AutomationAssessment2
             principalPage.AddAndIntoTheCar();
             carPage.ApplyCoupon("cupon");
             carPage.ValidateLabelCoupon("Message cupon");
-
         }
     }
 }
