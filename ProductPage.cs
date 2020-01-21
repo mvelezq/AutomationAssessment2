@@ -45,13 +45,13 @@ namespace AutomationAssessment2
         }
         public void ValidateProductPrice(string price)
         {
-            Assert.AreEqual(productPrice.Text, price);
+            Assert.AreEqual(productPrice.Text.ToLower(), price.ToLower());
             Console.WriteLine("The Price " + productPrice.Text + " is in the page");
         }
         public void ValidateProductQuantity(string number)
         {
-          
-            Assert.AreEqual(labelCarCount.Text, number);
+
+            Assert.AreEqual(labelCarCount.Text.ToLower(), number.ToLower());
             Console.WriteLine("The Quantity " + labelCarCount.Text + " is in the page");
         }
 
@@ -65,7 +65,7 @@ namespace AutomationAssessment2
 
         public void ValidateSpecificProduct(string product)
         {
-            Assert.AreEqual(labelHoodiesPocket.Text, product);
+            Assert.AreEqual(labelHoodiesPocket.Text.ToLower(), product.ToLower());
             Console.WriteLine("The Product " + labelHoodiesPocket.Text + " is in the page and loads properly");
             labelHoodiesPocket.Click();
         }

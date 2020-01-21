@@ -19,8 +19,9 @@ namespace AutomationAssessment2
             => PropertiesCollection.driver.FindElement(By.XPath("//input[@id='coupon_code']"));
         public IWebElement labelCoupon
             => PropertiesCollection.driver.FindElement(By.XPath("(//div[@class='entry-content']//*[contains(text(),'Coupon')])[1]"));
+        public IWebElement txtTotalDiscount
+            => PropertiesCollection.driver.FindElement(By.XPath("//tr[contains(@class,'cart-discount')]//span[@class='woocommerce-Price-amount amount']"));
         
-
         public void ValidateNameIntoTheCar(string name)
         {
             
@@ -42,7 +43,15 @@ namespace AutomationAssessment2
 
         public void ValidateLabelCoupon(string message)
         {
-            Assert.Equals(labelCoupon.Text, message);
+            Assert.AreEqual(labelCoupon.Text, message);
+            Console.WriteLine("The coupon was applied successfully");
+            
+        }
+
+        public void ValidateDiscountApplied(string price)
+        {
+            Assert.AreEqual(txtTotalDiscount.Text, price);
+            Console.WriteLine("The discout is correct = " + price);
         }
 
     }

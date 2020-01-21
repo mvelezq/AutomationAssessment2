@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using OpenQA.Selenium.Firefox;
+using static AutomationAssessment2.Constants;
+
 
 namespace AutomationAssessment2
 {
@@ -19,16 +21,23 @@ namespace AutomationAssessment2
             PrincipalPage principalPage = new PrincipalPage();
             ProductPage producPages = new ProductPage();
             CarPage carPage = new CarPage();
+            RequestProduct requestProduct = new RequestProduct();
 
-            principalPage.SearchProduct("AudyCH");
-            producPages.ValidateProductName("AudyCH");
-            producPages.ValidateProductPrice("$21.99");
-            producPages.IncreaseQuantity("7");
-            producPages.ValidateProductQuantity("7 items");
+            requestProduct.SendRequestProduct();
+
+            principalPage.SearchProduct(product);
+            producPages.ValidateProductName(product);
+            producPages.ValidateProductPrice(price);
+            producPages.IncreaseQuantity(quantityItemsInCar);
+            producPages.ValidateProductQuantity(itemsQuantity);
             producPages.labelCarCount.Click();
-            carPage.ValidateNameIntoTheCar("AudyCH");
-            carPage.ValidatePriceIntoTheCar("$21.99");
+            carPage.ValidateNameIntoTheCar(product);
+            carPage.ValidatePriceIntoTheCar(price); 
         }
+        
+        
+        
+        
         [Test]
         public void Test2()
         {
@@ -36,9 +45,9 @@ namespace AutomationAssessment2
             ProductPage producPages = new ProductPage();
 
             principalPage.ValidateSearchBox();
-            principalPage.SearchProduct("hoodie");
-            producPages.ValidateQuantityInResult("4");
-            producPages.ValidateSpecificProduct("Hoodie with Pocket");
+            principalPage.SearchProduct(hoodieProduct);
+            producPages.ValidateQuantityInResult(quantityInResult);
+            producPages.ValidateSpecificProduct(randomItemHoodies);
 
         }
         [Test]
@@ -49,8 +58,15 @@ namespace AutomationAssessment2
             CarPage carPage = new CarPage();
 
             principalPage.AddAndIntoTheCar();
-            carPage.ApplyCoupon("cupon");
-            carPage.ValidateLabelCoupon("Message cupon");
+            carPage.ApplyCoupon(coupon);
+            carPage.ValidateLabelCoupon(couponMessage);
+            carPage.ValidateDiscountApplied(price);
+        }
+
+        [TearDown]
+        public void CLoseNavegator()
+        {
+            PropertiesCollection.driver.Close();
         }
     }
 }
